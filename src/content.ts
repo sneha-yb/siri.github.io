@@ -3,8 +3,8 @@ export const site = {
   name: "Sneha Reddy",
   tagline: "Graduate Student · AI and Machine Learning · Purdue University",
   email: "snehareddyhs@gmail.com",
-  /** Put your headshot in public/ with this filename (or change the path). */
-  aboutPhotoSrc: "/pic.jpeg",
+  /** File in public/ — uses Vite base so it works on GitHub Pages subpaths. */
+  aboutPhotoSrc: `${import.meta.env.BASE_URL}pic.jpeg`,
   social: {
     github: "https://github.com/sneha-yb",
     linkedin: "https://www.linkedin.com/in/snehareddypalreddy",

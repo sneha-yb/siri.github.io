@@ -1,11 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// GitHub project page: https://<user>.github.io/<repo>/
-// If the repo is exactly <user>.github.io (user site), use base: "/" for build too.
-const GH_PAGES_BASE = "/siri.github.io/";
-
+// Relative base fixes asset URLs on GitHub Pages project sites
+// (https://<user>.github.io/<repo>/) without hard-coding the repo name.
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: command === "build" ? GH_PAGES_BASE : "/",
+  base: command === "build" ? "./" : "/",
 }));
