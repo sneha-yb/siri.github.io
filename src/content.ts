@@ -4,7 +4,7 @@ export const site = {
   tagline: "Graduate Student · AI and Machine Learning · Purdue University",
   email: "snehareddyhs@gmail.com",
   /** File in public/ — uses Vite base so it works on GitHub Pages subpaths. */
-  aboutPhotoSrc: `${import.meta.env.BASE_URL}pic.jpeg`,
+  aboutPhotoSrc: `${import.meta.env.BASE_URL}/siri.github.io/pic.jpeg`,
   social: {
     github: "https://github.com/sneha-yb",
     linkedin: "https://www.linkedin.com/in/snehareddypalreddy",
