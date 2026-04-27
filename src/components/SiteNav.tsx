@@ -14,7 +14,7 @@ export function SiteNav({
   onSayHi,
 }: Props) {
   const navTheme =
-    activeTab === "academic" ? "academic" : activeTab === "fun" ? "dark" : "linen";
+    activeTab === "academic" ? "academic" : "linen";
 
   const headerClass =
     navTheme === "dark"

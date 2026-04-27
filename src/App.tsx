@@ -4,7 +4,6 @@ import { placeholders, resumeUrl, site, type MainTab } from "./content";
 import { ContactSection } from "./components/ContactSection";
 import { WaveBackground } from "./components/WaveBackground";
 import { MobileDock } from "./components/MobileDock";
-import { OrbField } from "./components/OrbField";
 import { Reveal } from "./components/Reveal";
 import { SiteNav } from "./components/SiteNav";
 import policyDistillationBarsImg from "./assets/academic/policy-distillation-bars.png";
