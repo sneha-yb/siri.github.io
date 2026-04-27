@@ -24,9 +24,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Roboto Mono", "ui-monospace", "monospace"],
-        display: ["Roboto Mono", "ui-monospace", "monospace"],
-        mono: ["Roboto Mono", "ui-monospace", "monospace"],
+        sans: ["DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Instrument Serif", "ui-serif", "Georgia", "serif"],
+        mono: ["DM Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       animation: {
         float: "float 6s ease-in-out infinite",

@@ -1,22 +1,25 @@
+import resumePdfUrl from "./Sneha Reddy Palreddy_AI ML Engineer.pdf";
+
 /** Replace placeholders as you write real copy. */
 export const site = {
   name: "Sneha Reddy",
   tagline: "Graduate Student · AI and Machine Learning · Purdue University",
   email: "snehareddyhs@gmail.com",
   /** File in public/ — uses Vite base so it works on GitHub Pages subpaths. */
-  aboutPhotoSrc: `https://sneha-yb.github.io/siri.github.io/pic.jpeg`,
+  aboutPhotoSrc: `${import.meta.env.BASE_URL}pic.jpeg`,
   social: {
     github: "https://github.com/sneha-yb",
     linkedin: "https://www.linkedin.com/in/snehareddypalreddy",
   },
 };
 
-export type MainTab = "about" | "academic" | "fun";
+export const resumeUrl = resumePdfUrl;
+
+export type MainTab = "about" | "academic";
 
 export const mainTabs: { id: MainTab; label: string }[] = [
   { id: "about", label: "About" },
   { id: "academic", label: "Academic" },
-  { id: "fun", label: "Fun" },
 ];
 
 export const placeholders = {

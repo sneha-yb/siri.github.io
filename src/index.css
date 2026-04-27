@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +9,9 @@
     @apply scroll-smooth font-sans antialiased;
   }
   body {
-    @apply bg-ink-950 text-ink-100 antialiased;
+    @apply antialiased;
+    background: #f8f4f0;
+    color: #281408;
   }
   button,
   input,
@@ -23,5 +27,72 @@
 @layer utilities {
   .grain {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  .academic-page {
+    background: linear-gradient(
+      to bottom,
+      #f8f4f0 0%,
+      #f6f2ee 8%,
+      #f4f8fd 18%,
+      #f4f8fd 100%
+    );
+    color: #1a2030;
+    font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+      sans-serif;
+  }
+
+  .academic-mono {
+    font-family: "DM Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+  }
+
+  .academic-serif {
+    font-family: "Instrument Serif", ui-serif, Georgia, Cambria, "Times New Roman",
+      Times, serif;
+  }
+
+  .academic-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #c8dff0, transparent);
+  }
+
+  .academic-card {
+    border-radius: 12px;
+    border: 1px solid #dde8f4;
+    background: #ffffff;
+    box-shadow: 0 1px 6px rgba(91, 143, 194, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .academic-card:hover {
+    box-shadow: 0 8px 28px rgba(91, 143, 194, 0.14);
+    transform: translateY(-2px);
+  }
+
+  .linen-page {
+    background: #f8f4f0;
+    color: #281408;
+  }
+
+  .blob-float {
+    animation: blobFloat 9s ease-in-out infinite alternate;
+  }
+
+  .blob-float-slow {
+    animation: blobFloat 10s ease-in-out infinite alternate;
+  }
+
+  .blob-float-fast {
+    animation: blobFloat 8s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes blobFloat {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-15px);
   }
 }

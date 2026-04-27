@@ -1,80 +1,20 @@
-import { AnimatePresence, motion, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { placeholders, site, type MainTab } from "./content";
-import resumePdfUrl from "./Sneha Reddy Palreddy_AI ML Engineer.pdf";
-import { AboutHeroDecor } from "./components/AboutHeroDecor";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { placeholders, resumeUrl, site, type MainTab } from "./content";
 import { ContactSection } from "./components/ContactSection";
+import { WaveBackground } from "./components/WaveBackground";
 import { MobileDock } from "./components/MobileDock";
 import { OrbField } from "./components/OrbField";
 import { Reveal } from "./components/Reveal";
 import { SiteNav } from "./components/SiteNav";
+import policyDistillationBarsImg from "./assets/academic/policy-distillation-bars.png";
+import eigenAttentionPerplexityImg from "./assets/academic/eigen-attention-perplexity.png";
+import mmwaveWatermelonImg from "./assets/academic/mmwave-watermelon.png";
+import youngResearchFellowCircuitImg from "./assets/academic/young-research-fellow-circuit.png";
+import avishkarHyperloopGroupImg from "./assets/academic/avishkar-hyperloop-group.png";
 
 function scrollToContact() {
   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-}
-
-function TiltCard({
-  title,
-  blurb,
-  index,
-}: {
-  title: string;
-  blurb: string;
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mx = useSpring(0, { stiffness: 260, damping: 28 });
-  const my = useSpring(0, { stiffness: 260, damping: 28 });
-  const rotateX = useTransform(my, [-0.5, 0.5], [6, -6]);
-  const rotateY = useTransform(mx, [-0.5, 0.5], [-8, 8]);
-  const shadow = useTransform(
-    [mx, my],
-    ([x, y]) => `${(x as number) * 18}px ${(y as number) * 22}px 50px rgba(0,0,0,0.35)`
-  );
-
-  function onMove(e: React.MouseEvent) {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    mx.set((e.clientX - (r.left + r.width / 2)) / r.width);
-    my.set((e.clientY - (r.top + r.height / 2)) / r.height);
-  }
-
-  function onLeave() {
-    mx.set(0);
-    my.set(0);
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 900,
-        boxShadow: shadow,
-        transformStyle: "preserve-3d",
-      }}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="group relative overflow-hidden rounded-2xl border border-ink-700/70 bg-ink-900/40 p-6 ring-1 ring-white/[0.03] transition-colors hover:border-ink-600"
-    >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(500px circle at 50% 40%, rgba(196,165,116,0.12), transparent 50%)",
-        }}
-      />
-      <span className="font-mono text-xs text-accent/80">0{index + 1}</span>
-      <h3 className="mt-2 font-display text-xl font-semibold text-ink-50">
-        {title}
-      </h3>
-      <p className="mt-3 font-sans text-sm leading-relaxed text-ink-400">
-        {blurb}
-      </p>
-    </motion.div>
-  );
 }
 
 export default function App() {
@@ -89,11 +29,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const showWipBanner = tab === "academic" || tab === "fun";
+  const showWipBanner = false;
 
   return (
     <>
-      <OrbField />
       <SiteNav
         activeTab={tab}
         onTabChange={setTab}
@@ -123,92 +62,133 @@ export default function App() {
 
       <main className="relative z-10">
         {tab === "about" && (
-          <>
-            <section className="relative flex min-h-[100dvh] flex-col justify-end px-4 pb-24 pt-32 sm:px-6 md:pb-32">
-              <AboutHeroDecor />
-              <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <div style={{ background: "#f8f4f0" }}>
+            <section className="relative h-[100dvh] overflow-hidden px-4 pt-24 sm:px-6">
+              {/* Wave background */}
+              <WaveBackground />
+
+              {/* Soft animated blobs */}
+              <div aria-hidden className="pointer-events-none absolute inset-0">
+                <div
+                  className="blob-float-slow absolute right-[-80px] top-[-60px] h-[320px] w-[320px] rounded-full blur-[65px]"
+                  style={{ background: "#e0c8a8", opacity: 0.5 }}
+                />
+                <div
+                  className="blob-float-fast absolute left-[-60px] top-[40px] h-[200px] w-[200px] rounded-full blur-[60px]"
+                  style={{ background: "#d4b088", opacity: 0.35 }}
+                />
+                <div
+                  className="blob-float absolute bottom-[-60px] right-[-40px] h-[180px] w-[180px] rounded-full blur-[55px]"
+                  style={{ background: "#e8d4b8", opacity: 0.3 }}
+                />
+              </div>
+
+              <div className="relative mx-auto flex h-full w-full max-w-6xl flex-col justify-end pb-8">
                 <motion.p
-                  className="font-mono text-xs uppercase tracking-[0.35em] text-accent"
-                  initial={{ opacity: 0, y: 16 }}
+                  className="font-mono text-[12px] uppercase tracking-[0.2em]"
+                  style={{ color: "#a89070" }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.15 }}
+                  transition={{ duration: 0.6, delay: 0.05 }}
                 >
-                  Hello
+                  HELLO
                 </motion.p>
                 <motion.h1
-                  className="mt-4 max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink-50 sm:text-6xl md:text-7xl"
-                  initial={{ opacity: 0, y: 24 }}
+                  className="mt-4 font-display text-[56px] font-normal leading-[1.0] sm:text-[68px]"
+                  style={{ color: "#281408" }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.75, delay: 0.25 }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
                 >
                   I&apos;m{" "}
-                  <span className="bg-gradient-to-r from-ink-100 via-accent to-ink-200 bg-[length:200%_auto] bg-clip-text text-transparent animate-shimmer">
-                    {site.name}
+                  <span className="italic" style={{ color: "#985840" }}>
+                    {site.name}.
                   </span>
-                  .
                 </motion.h1>
                 <motion.p
-                  className="mt-6 max-w-xl font-sans text-lg text-ink-400"
+                  className="mt-5 max-w-xl text-[16px] font-light leading-relaxed"
+                  style={{ color: "#7a5838" }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.45 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
                 >
-                  {site.tagline}
+                  Electrical engineer who got pulled into AI and never looked back. Currently building things at Purdue, one rabbit hole at a time.
                 </motion.p>
+
                 <motion.div
-                  className="mt-10 flex flex-wrap gap-3"
-                  initial={{ opacity: 0, y: 12 }}
+                  className="mt-8 flex flex-wrap items-center gap-3"
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
+                  transition={{ duration: 0.6, delay: 0.28 }}
                 >
                   <button
                     type="button"
                     onClick={() => setTab("academic")}
-                    className="rounded-full bg-ink-100 px-6 py-3 font-sans text-sm font-semibold text-ink-950 transition hover:bg-white"
+                    className="rounded-full px-6 py-3 font-mono text-[13px] tracking-[0.12em] transition"
+                    style={{ background: "#281810", color: "#f8f4f0" }}
                   >
-                    Academic
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setTab("fun")}
-                    className="rounded-full border border-ink-600 px-6 py-3 font-sans text-sm font-medium text-ink-200 transition hover:border-accent/50 hover:text-accent"
-                  >
-                    Fun
+                    my work
                   </button>
                 </motion.div>
-              </div>
-              <motion.div
-                className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 md:block"
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                aria-hidden
-              >
-                <div className="h-10 w-6 rounded-full border-2 border-ink-600">
-                  <div className="mx-auto mt-2 h-1.5 w-1 rounded-full bg-accent" />
+
+                <div className="mt-8 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em]" style={{ color: "#c8b498" }}>
+                  <span className="h-px w-6" style={{ background: "#c8b498" }} />
+                  <span>scroll</span>
                 </div>
-              </motion.div>
+
+                {/* Info strip — directly below scroll hint */}
+                <div
+                  className="mt-10 border-t pt-6"
+                  style={{ borderColor: "#ddd0c4" }}
+                >
+                  <div className="grid gap-4 md:grid-cols-4">
+                    {[
+                      { k: "currently", v: "MS @ Purdue · AI + ML" },
+                      { k: "previously", v: "IIT Madras · AMD · TI" },
+                      { k: "building", v: "things that actually work" },
+                      { k: "also", v: "dancer · kdrama fan · nerd" },
+                    ].map((x) => (
+                      <div key={x.k}>
+                        <div className="font-mono text-[10px] uppercase tracking-[0.15em]" style={{ color: "#a89080" }}>
+                          {x.k}
+                        </div>
+                        <div className="mt-1 text-[13px]" style={{ color: "#381808" }}>
+                          {x.v}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </section>
 
-            <section className="px-4 py-24 sm:px-6 md:py-32">
+            <section className="px-4 py-32 sm:px-6 md:py-48">
               <div className="mx-auto max-w-6xl">
                 <Reveal className="text-center">
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-500">
+                  <p className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: "#a89070" }}>
                     About
                   </p>
-                  <h2 className="mt-3 font-display text-3xl font-semibold text-ink-50 md:text-4xl">
+                  <h2 className="mt-3 font-display text-3xl font-semibold md:text-4xl" style={{ color: "#281408" }}>
                     A little about myself
                   </h2>
                 </Reveal>
                 <div className="mt-10 flex flex-col items-center gap-10 md:mt-12 md:flex-row md:items-center md:justify-center md:gap-12 lg:gap-16 xl:gap-20">
                   <Reveal className="shrink-0" delay={0.06}>
                     <div className="relative flex justify-center">
-                      <div className="h-44 w-44 overflow-hidden rounded-full border-4 border-ink-700 bg-ink-900 shadow-lg shadow-black/30 ring-2 ring-accent/25 sm:h-52 sm:w-52 md:h-56 md:w-56">
+                      <div className="h-44 w-44 overflow-hidden rounded-full border-4 sm:h-52 sm:w-52 md:h-56 md:w-56" style={{ borderColor: "#c0a888", background: "#ede4d8", boxShadow: "0 4px 24px rgba(192,104,56,0.10)" }}>
                         <img
                           src={site.aboutPhotoSrc}
                           alt={`${site.name} — profile`}
                           className="h-full w-full object-cover object-center"
-                          loading="lazy"
-                          decoding="async"
+                          style={{
+                            objectPosition: "55% 35%",
+                            transform: "scale(1.8)",
+                            transformOrigin: "center",
+                          }}
+                          loading="eager"
+                          decoding="sync"
+                          fetchPriority="high"
                         />
                       </div>
                     </div>
@@ -217,7 +197,7 @@ export default function App() {
                     className="w-full max-w-xl min-w-0 md:max-w-2xl md:flex-1"
                     delay={0.1}
                   >
-                    <p className="text-center font-sans text-lg leading-relaxed text-ink-300 md:text-left md:leading-[1.75]">
+                    <p className="text-center font-sans text-lg leading-relaxed md:text-left md:leading-[1.75]" style={{ color: "#7a5838" }}>
                       {placeholders.about}
                     </p>
                   </Reveal>
@@ -225,179 +205,565 @@ export default function App() {
               </div>
             </section>
 
-            <ContactSection />
-          </>
+            <ContactSection theme="linen" />
+          </div>
         )}
 
         {tab === "academic" && (
           <>
-            <section className="px-4 pb-12 pt-44 sm:px-6 md:pt-48">
-              <div className="mx-auto max-w-6xl">
-                <Reveal>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-500">
-                    Academic
-                  </p>
-                  <h1 className="mt-3 font-display text-4xl font-semibold text-ink-50 md:text-5xl">
-                    Projects, teaching &amp; CV
-                  </h1>
-                  <p className="mt-4 max-w-2xl font-sans text-ink-400">
-                    My technical side.
-                  </p>
-                </Reveal>
-              </div>
-            </section>
-
-            <section
-              id="projects"
-              className="border-y border-ink-800/80 bg-ink-900/20 px-4 py-24 sm:px-6 md:py-32"
-            >
-              <div className="mx-auto max-w-6xl">
-                <Reveal>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-500">
-                    Projects
-                  </p>
-                  <h2 className="mt-3 font-display text-3xl font-semibold text-ink-50 md:text-4xl">
-                    Things I&apos;ve built
-                  </h2>
-                  <p className="mt-4 max-w-2xl font-sans text-ink-400">
-                    {placeholders.projectsIntro}
-                  </p>
-                </Reveal>
-                <div className="mt-14 grid gap-6 md:grid-cols-3">
-                  {placeholders.projectCards.map((card, i) => (
-                    <Reveal key={card.title} delay={0.06 * (i + 1)}>
-                      <TiltCard
-                        title={card.title}
-                        blurb={card.blurb}
-                        index={i}
-                      />
-                    </Reveal>
-                  ))}
+            <div className="academic-page">
+              <section className="px-4 pb-10 pt-36 sm:px-6 md:pt-40" style={{ background: "#f8f4f0" }}>
+                <div className="mx-auto max-w-6xl">
+                  <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                    <div className="min-w-0">
+                      <p className="academic-mono text-[10px] font-medium uppercase tracking-[0.22em] text-[#8aabcc]">
+                        Academic
+                      </p>
+                      <h1 className="academic-serif mt-3 text-[38px] font-normal leading-[1.05] text-[#1a2030] md:text-[44px]">
+                        projects, teaching &amp;{" "}
+                        <span className="italic text-[#5b8fc2]">cv.</span>
+                      </h1>
+                      <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-[#6a7a8a]">
+                        A soft snapshot of where I&apos;ve worked, what I&apos;ve built,
+                        and the systems I like to think about.
+                      </p>
+                    </div>
+                    <div className="flex shrink-0 items-center">
+                      <a
+                        href={resumeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="academic-mono inline-flex items-center gap-2 rounded-full border border-[#dde8f4] bg-white px-4 py-2 text-[11px] font-medium tracking-[0.12em] text-[#5b8fc2] shadow-[0_1px_6px_rgba(91,143,194,0.06)] transition hover:shadow-[0_8px_28px_rgba(91,143,194,0.14)]"
+                      >
+                        Resume
+                        <span aria-hidden className="text-[#9ab0c8]">
+                          ↗
+                        </span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section className="border-t border-ink-800/80 bg-ink-900/15 px-4 py-24 sm:px-6 md:py-32">
-              <div className="mx-auto max-w-6xl">
-                <Reveal>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-500">
-                    Teaching
+              <div className="academic-divider mx-auto max-w-6xl px-4 sm:px-6" />
+
+              {/* EXPERIENCE */}
+              <section className="px-4 py-14 sm:px-6 md:py-16">
+                <div className="mx-auto max-w-6xl">
+                  <div
+                    className="mb-10 h-[3px] w-14 rounded-[2px]"
+                    style={{
+                      background: "linear-gradient(to right, #c0a888, #7aaad8)",
+                    }}
+                  />
+                  <p className="academic-mono text-[9px] font-medium uppercase tracking-[0.2em] text-[#8aabcc]">
+                    EXPERIENCE
                   </p>
-                  <h2 className="mt-3 font-display text-3xl font-semibold text-ink-50 md:text-4xl">
-                    Classroom energy
+                  <h2 className="academic-serif mt-3 text-[22px] font-normal text-[#1a2030]">
+                    where i&apos;ve <em style={{ color: "#7aaad8" }}>worked.</em>
                   </h2>
-                </Reveal>
-                <div className="mt-12 grid gap-4 md:grid-cols-2">
-                  {placeholders.teaching.map((t, i) => (
-                    <Reveal key={t.role} delay={0.08 * i}>
-                      <div className="rounded-2xl border border-ink-700/60 bg-ink-950/40 p-6">
-                        <p className="font-mono text-xs text-accent">{t.term}</p>
-                        <h3 className="mt-2 font-display text-xl text-ink-50">
-                          {t.role}
+
+                  <div className="mt-10 grid gap-8 md:grid-cols-[28px_1fr]">
+                    <div
+                      className="relative mx-auto hidden w-[2px] md:block"
+                      style={{
+                        background:
+                          "linear-gradient(to bottom, #7aaad8, #a8c8e8, #d0e4f4)",
+                      }}
+                    />
+
+                    <div className="space-y-6">
+                      {[
+                        {
+                          company: "AMD",
+                          role: "AI INTERN · CAD & EDA AUTOMATION",
+                          date: "sep 2025 – dec 2025",
+                          dot: { bg: "#7aaad8", ring: "#a8c8e8" },
+                          meta: { color: "#5b8fc2" },
+                          bullets: [
+                            <>
+                              <span className="font-medium text-[#3a5070]">
+                                RAG pipeline
+                              </span>{" "}
+                              over <span className="font-medium text-[#3a5070]">2,100 pages</span> of chipmaker docs — engineers
+                              stopped doing manual lookups
+                            </>,
+                            <>
+                              <span className="font-medium text-[#3a5070]">
+                                A* + RL autorouter
+                              </span>{" "}
+                              on live silicon — <span className="font-medium text-[#3a5070]">92/118</span> nets routed on a real AMD package
+                            </>,
+                          ],
+                        },
+                        {
+                          company: "Shatayuh Jeevanam Healthcare",
+                          role: "ML INTERN · HEALTHCARE AI",
+                          date: "feb – may 2024",
+                          dot: { bg: "#a8c8e8", ring: "#d0e4f4" },
+                          meta: { color: "#6a9ac4" },
+                          bullets: [
+                            <>
+                              LLMs for Alexa review sentiment —{" "}
+                              <span className="font-medium text-[#3a5070]">92%</span>{" "}
+                              accuracy for Ayurvedic health tracking
+                            </>,
+                          ],
+                        },
+                        {
+                          company: "Texas Instruments",
+                          role: "DIGITAL DESIGN INTERN",
+                          date: "may – jul 2023",
+                          dot: { bg: "#d0e4f4", ring: "#e7f2fb" },
+                          meta: { color: "#7aaac4" },
+                          bullets: [
+                            <>
+                              Formal verification for Ethernet PHY — bugs caught before tape-out
+                            </>,
+                            <>
+                              <span className="font-medium text-[#3a5070]">26</span> register types auto-tested via generated CSV
+                            </>,
+                          ],
+                        },
+                      ].map((item, idx) => (
+                        <div key={item.company} className="grid gap-3 md:grid-cols-[28px_1fr] md:gap-8">
+                          <div className="relative hidden md:block">
+                            <div
+                              className="absolute left-1/2 top-4 h-2 w-2 -translate-x-1/2 rounded-full"
+                              style={{
+                                background: item.dot.bg,
+                                boxShadow: `0 0 0 3px ${item.dot.ring}`,
+                                opacity: idx === 0 ? 1 : idx === 1 ? 0.9 : 0.75,
+                              }}
+                            />
+                          </div>
+                          <div className="academic-card p-5">
+                            <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                              <div className="min-w-0">
+                                <h3 className="text-[15px] font-medium text-[#1a2030]">
+                                  {item.company}
+                                </h3>
+                                <p
+                                  className="academic-mono mt-1 text-[11px] font-medium tracking-[0.12em]"
+                                  style={{ color: item.meta.color }}
+                                >
+                                  {item.role}
+                                </p>
+                              </div>
+                              <p className="academic-mono text-[11px] tracking-[0.12em] text-[#9ab0c8]">
+                                {item.date}
+                              </p>
+                            </div>
+                            <div className="mt-4 space-y-2 text-[14px] leading-relaxed text-[#6a7a8a]">
+                              {item.bullets.map((b, i) => (
+                                <div key={i} className="flex gap-2">
+                                  <span style={{ color: item.dot.bg }}>·</span>
+                                  <span>{b}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <div className="academic-divider mx-auto max-w-6xl px-4 sm:px-6" />
+
+              {/* PROJECTS */}
+              <section className="px-4 py-14 sm:px-6 md:py-16">
+                <div className="mx-auto max-w-6xl">
+                  <div
+                    className="mb-10 h-[3px] w-14 rounded-[2px]"
+                    style={{
+                      background:
+                        "linear-gradient(to right, #4aa88a, rgba(74,168,138,0))",
+                    }}
+                  />
+                  <p className="academic-mono text-[9px] font-medium uppercase tracking-[0.2em] text-[#8aabcc]">
+                    PROJECTS
+                  </p>
+                  <h2 className="academic-serif mt-3 text-[22px] font-normal text-[#1a2030]">
+                    things i&apos;ve <em style={{ color: "#4aa88a" }}>built.</em>
+                  </h2>
+
+                  <div className="mt-10 grid gap-6 md:grid-cols-2">
+                    {[
+                      {
+                        n: "01",
+                        title: "Policy Distillation for RL Agents",
+                        desc: "Compressed DQN teachers into compact CNN students using KL distillation. Pong student matched teacher at 11.5 vs 9.6. Breakout large student hit 136 vs teacher's 145 — at 4× fewer parameters.",
+                        headerBg: "#eef4fb",
+                        tags: [
+                          { t: "RL", c: "#5b8fc2", bg: "rgba(91,143,194,0.10)" },
+                          { t: "KL distillation", c: "#5b8fc2", bg: "rgba(91,143,194,0.10)" },
+                          { t: "PyTorch", c: "#3f6f9d", bg: "rgba(91,143,194,0.06)" },
+                          { t: "Atari", c: "#3f6f9d", bg: "rgba(91,143,194,0.06)" },
+                          { t: "Purdue ECE", c: "#3f6f9d", bg: "rgba(91,143,194,0.06)" },
+                        ],
+                        svg: (
+                          <img
+                            src={policyDistillationBarsImg}
+                            alt="Policy distillation results bar charts (Pong and Breakout)"
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ),
+                      },
+                      {
+                        n: "02",
+                        title: "Eigen Attention — KV Compression",
+                        desc: "SVD-based KV cache compression across LLaMA-3 8B, MPT-7B, OPT. Plus a hardware-optimized softmax in Verilog synthesized on Skywater 130nm — 1.16mW total power. Two bottlenecks, one project.",
+                        headerBg: "#edf6f2",
+                        tags: [
+                          { t: "LLM", c: "#4aa88a", bg: "rgba(74,168,138,0.10)" },
+                          { t: "CUDA", c: "#4aa88a", bg: "rgba(74,168,138,0.10)" },
+                          { t: "Verilog", c: "#2d6b5a", bg: "rgba(74,168,138,0.06)" },
+                          { t: "Hardware", c: "#2d6b5a", bg: "rgba(74,168,138,0.06)" },
+                          { t: "ASIC", c: "#2d6b5a", bg: "rgba(74,168,138,0.06)" },
+                        ],
+                        svg: (
+                          <img
+                            src={eigenAttentionPerplexityImg}
+                            alt="Perplexity and accuracy vs compression curves"
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ),
+                      },
+                      {
+                        n: "03",
+                        title: "Fruit Ripeness via mmWave Radar",
+                        desc: "FMCW radar sensing ripeness through the rind. First framework to model thick-rind fruit as three layers and predict SSC, moisture, and firmness together. Ongoing.",
+                        headerBg: "#fff3f3",
+                        headerH: "h-[170px]",
+                        tags: [
+                          { t: "mmWave", c: "#d46a7a", bg: "rgba(212,106,122,0.12)" },
+                          { t: "TI Radar", c: "#d46a7a", bg: "rgba(212,106,122,0.12)" },
+                          { t: "ML", c: "#a84a5b", bg: "rgba(212,106,122,0.08)" },
+                          { t: "Signal Processing", c: "#a84a5b", bg: "rgba(212,106,122,0.08)" },
+                        ],
+                        svg: (
+                          <img
+                            src={mmwaveWatermelonImg}
+                            alt="mmWave radar fruit ripeness setup photo"
+                            className="h-full w-full object-cover"
+                            style={{ objectPosition: "58% 44%" }}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ),
+                      },
+                      {
+                        n: "04",
+                        title: "This website",
+                        desc: "Vibe-coded with Claude in one afternoon. Transcript in my YC application.",
+                        headerBg: "#f0f4ff",
+                        tags: [
+                          { t: "Claude", c: "#7a8ac8", bg: "rgba(122,138,200,0.12)" },
+                          { t: "Cursor", c: "#7a8ac8", bg: "rgba(122,138,200,0.12)" },
+                          { t: "Vibe-coded", c: "#9a8ac8", bg: "rgba(122,138,200,0.08)" },
+                        ],
+                        svg: (
+                          <svg viewBox="0 0 360 110" className="h-full w-full">
+                            <rect width="360" height="110" fill="#f0f4ff" />
+                            <rect x="40" y="16" width="280" height="78" rx="12" fill="#fff" stroke="#c8d4f0" />
+                            <rect x="40" y="16" width="280" height="18" rx="12" fill="#f7f9ff" stroke="#c8d4f0" />
+                            <circle cx="54" cy="25" r="3" fill="#d18a8a" />
+                            <circle cx="66" cy="25" r="3" fill="#d4bf7a" />
+                            <circle cx="78" cy="25" r="3" fill="#84b88a" />
+                            <text x="112" y="28" fontFamily="DM Mono" fontSize="9" fill="#9ab0c8">
+                              sneha-yb.github.io/siri
+                            </text>
+                            <text x="56" y="54" fontFamily="DM Mono" fontSize="10" fill="#7a8ac8">
+                              built-with claude
+                            </text>
+                            <text x="56" y="70" fontFamily="DM Mono" fontSize="10" fill="#9ab0c8">
+                              // one afternoon
+                            </text>
+                            <text x="56" y="86" fontFamily="DM Mono" fontSize="10" fill="#9a8ac8">
+                              ships &gt; perfects
+                            </text>
+                            <rect x="184" y="78" width="6" height="10" fill="#9ab0c8" opacity="0.75" />
+                          </svg>
+                        ),
+                      },
+                    ].map((p) => (
+                      <div key={p.n} className="academic-card overflow-hidden">
+                        <div
+                          className={p.headerH ?? "h-[110px]"}
+                          style={{ background: p.headerBg }}
+                        >
+                          {p.svg}
+                        </div>
+                        <div className="p-5">
+                          <p className="academic-mono text-[10px] tracking-[0.18em] text-[#9ab0c8]">
+                            PROJECT {p.n}
+                          </p>
+                          <h3 className="mt-2 text-[16px] font-medium text-[#1a2030]">
+                            {p.title}
+                          </h3>
+                          <p className="mt-2 text-[14px] leading-relaxed text-[#6a7a8a]">
+                            {p.desc}
+                          </p>
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {p.tags.map((tag) => (
+                              <span
+                                key={tag.t}
+                                className="academic-mono rounded-full px-3 py-1 text-[10px]"
+                                style={{
+                                  border: `1px solid ${tag.c}`,
+                                  color: tag.c,
+                                  background: tag.bg,
+                                }}
+                              >
+                                {tag.t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <div className="academic-divider mx-auto max-w-6xl px-4 sm:px-6" />
+
+              {/* BEYOND THE CLASSROOM */}
+              <section className="px-4 py-14 sm:px-6 md:py-16">
+                <div className="mx-auto max-w-6xl">
+                  <div
+                    className="mb-10 h-[3px] w-14 rounded-[2px]"
+                    style={{
+                      background:
+                        "linear-gradient(to right, #7a8ac8, rgba(122,138,200,0))",
+                    }}
+                  />
+                  <p className="academic-mono text-[9px] font-medium uppercase tracking-[0.2em] text-[#8aabcc]">
+                    BEYOND THE CLASSROOM
+                  </p>
+                  <h2 className="academic-serif mt-3 text-[22px] font-normal text-[#1a2030]">
+                    other things i&apos;ve <em style={{ color: "#7a8ac8" }}>built.</em>
+                  </h2>
+
+                  <div className="mt-10 grid gap-6 md:grid-cols-2">
+                    {[
+                      {
+                        prefix: "[ hardware ]",
+                        prefixColor: "#7a8ac8",
+                        blob: "#7a8ac8",
+                        title: "Avishkar Hyperloop",
+                        desc: "We built a hyperloop. The Railway Minister of India showed up. Top 5 globally for electrical design. Not a bad undergrad project XD",
+                        badge: "top 5 global · electrical design",
+                        image: avishkarHyperloopGroupImg,
+                        imageAspect: "aspect-[16/9]",
+                        imageFit: "object-cover",
+                        imagePosition: "50% 22%",
+                        tags: ["EHW · European Hyperloop Week"],
+                      },
+                      {
+                        prefix: "[ research ]",
+                        prefixColor: "#7a8ac8",
+                        blob: "#8aaac8",
+                        title: "Young Research Fellow",
+                        desc:
+                          "Selected for IIT Madras YRF. Automated LDO regulator optimization.",
+                        badge: "selective · IIT Madras",
+                        image: youngResearchFellowCircuitImg,
+                        imageAspect: "aspect-[16/9]",
+                        imageFit: "object-contain",
+                        imagePosition: "center",
+                      },
+                    ].map((c) => (
+                      <div key={c.title} className="academic-card relative overflow-hidden p-5">
+                        <div
+                          className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full"
+                          style={{ background: c.blob, opacity: 0.12 }}
+                        />
+                        {c.image && (
+                          <div className="mb-4 overflow-hidden rounded-[10px] bg-[#f4f8fd] p-2">
+                            <img
+                              src={c.image}
+                              alt={`${c.title} poster`}
+                              className={`w-full ${c.imageAspect ?? "aspect-[16/9]"} ${
+                                c.imageFit ?? "object-contain"
+                              }`}
+                              loading="lazy"
+                              decoding="async"
+                              style={{ objectPosition: c.imagePosition ?? "center" }}
+                            />
+                          </div>
+                        )}
+                        <p
+                          className="academic-mono text-[11px] font-medium tracking-[0.14em]"
+                          style={{ color: c.prefixColor }}
+                        >
+                          {c.prefix}
+                        </p>
+                        <h3 className="mt-2 text-[16px] font-medium text-[#1a2030]">
+                          {c.title}
                         </h3>
-                        <p className="mt-2 font-sans text-sm text-ink-400">
-                          {t.note}
+                        <p className="mt-2 text-[14px] leading-relaxed text-[#6a7a8a]">
+                          {c.desc}
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {c.tags?.map((t: string) => (
+                            <span
+                              key={t}
+                              className="academic-mono inline-flex rounded-full px-3 py-1 text-[10px]"
+                              style={{
+                                border: "1px solid #7a8ac8",
+                                color: "#7a8ac8",
+                                background: "#f4f5ff",
+                              }}
+                            >
+                              {t}
+                            </span>
+                          ))}
+                          <span
+                            className="academic-mono inline-flex rounded-full px-3 py-1 text-[10px]"
+                            style={{
+                              border: "1px solid #7a8ac8",
+                              color: "#7a8ac8",
+                              background: "#f4f5ff",
+                            }}
+                          >
+                            {c.badge}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <div className="academic-divider mx-auto max-w-6xl px-4 sm:px-6" />
+
+              {/* TEACHING */}
+              <section className="px-4 py-14 sm:px-6 md:py-16">
+                <div className="mx-auto max-w-6xl">
+                  <div
+                    className="mb-10 h-[3px] w-14 rounded-[2px]"
+                    style={{
+                      background:
+                        "linear-gradient(to right, #5b8fc2, rgba(91,143,194,0))",
+                    }}
+                  />
+                  <p className="academic-mono text-[9px] font-medium uppercase tracking-[0.2em] text-[#8aabcc]">
+                    TEACHING
+                  </p>
+                  <h2 className="academic-serif mt-3 text-[22px] font-normal text-[#1a2030]">
+                    where i&apos;ve <em style={{ color: "#5b8fc2" }}>taught.</em>
+                  </h2>
+
+                  <div className="academic-card mt-10 overflow-hidden">
+                    <div
+                      className="h-full w-full"
+                      style={{
+                        borderLeft: "3px solid transparent",
+                        borderImage:
+                          "linear-gradient(to bottom, #7aaad8, #a8c8e8) 1",
+                      }}
+                    >
+                      <div className="p-6 md:p-7">
+                        <p className="academic-mono text-[11px] tracking-[0.12em] text-[#9ab0c8]">
+                          Graduate TA — Operating Systems · Purdue
+                        </p>
+                        <p className="mt-3 text-[14px] leading-relaxed text-[#6a7a8a]">
+                          JOS labs —{" "}
+                          <span className="font-medium text-[#5b8fc2]">
+                            bootloading
+                          </span>
+                          ,{" "}
+                          <span className="font-medium text-[#5b8fc2]">
+                            virtual memory
+                          </span>
+                          ,{" "}
+                          <span className="font-medium text-[#5b8fc2]">
+                            kernel debugging
+                          </span>
+                          , paging, concurrency. If you can teach it, you know it cold.
                         </p>
                       </div>
-                    </Reveal>
-                  ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section className="border-t border-ink-800/80 px-4 py-24 sm:px-6 md:py-32">
-              <div className="mx-auto max-w-5xl">
-                <Reveal>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-500">
-                    Resume
+              <div className="academic-divider mx-auto max-w-6xl px-4 sm:px-6" />
+
+              {/* EDUCATION */}
+              <section className="px-4 py-14 sm:px-6 md:py-16">
+                <div className="mx-auto max-w-6xl pb-4">
+                  <div
+                    className="mb-10 h-[3px] w-14 rounded-[2px]"
+                    style={{
+                      background:
+                        "linear-gradient(to right, #6aaac8, rgba(106,170,200,0))",
+                    }}
+                  />
+                  <p className="academic-mono text-[9px] font-medium uppercase tracking-[0.2em] text-[#8aabcc]">
+                    EDUCATION
                   </p>
-                  <h2 className="mt-3 font-display text-3xl font-semibold text-ink-50 md:text-4xl">
-                    CV at a glance
+                  <h2 className="academic-serif mt-3 text-[22px] font-normal text-[#1a2030]">
+                    where i&apos;ve <em style={{ color: "#6aaac8" }}>studied.</em>
                   </h2>
-                  <p className="mt-4 max-w-2xl font-sans text-sm text-ink-400">
-                    View inline below or open in a new tab if your browser prefers its own PDF viewer.
-                  </p>
-                </Reveal>
-                <Reveal className="mt-10" delay={0.06}>
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href={resumePdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex rounded-full border border-ink-600 px-5 py-2.5 font-sans text-sm font-medium text-ink-200 transition hover:border-accent/50 hover:text-accent"
-                    >
-                      Open in new tab
-                    </a>
-                    <a
-                      href={resumePdfUrl}
-                      download="Sneha_Reddy_Palreddy_Resume.pdf"
-                      className="inline-flex rounded-full bg-accent/15 px-5 py-2.5 font-sans text-sm font-medium text-accent ring-1 ring-accent/30 transition hover:bg-accent/25"
-                    >
-                      Download PDF
-                    </a>
-                  </div>
-                </Reveal>
-                <Reveal className="mt-8" delay={0.1}>
-                  <div className="overflow-hidden rounded-2xl border border-ink-700/80 bg-ink-900/30 shadow-xl shadow-black/20 ring-1 ring-white/[0.04]">
-                    <iframe
-                      title="Sneha Reddy Palreddy — resume PDF"
-                      src={resumePdfUrl}
-                      className="h-[min(85vh,1100px)] w-full bg-ink-900"
-                    />
-                  </div>
-                </Reveal>
-              </div>
-            </section>
 
-            <ContactSection />
-          </>
-        )}
-
-        {tab === "fun" && (
-          <>
-            <section className="px-4 pb-12 pt-44 sm:px-6 md:pt-48">
-              <div className="mx-auto max-w-6xl">
-                <Reveal>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-500">
-                    Fun
-                  </p>
-                  <h1 className="mt-3 font-display text-4xl font-semibold text-ink-50 md:text-5xl">
-                    Off the clock
-                  </h1>
-                  <p className="mt-6 max-w-2xl font-sans text-lg leading-relaxed text-ink-300">
-                    {placeholders.fun.intro}
-                  </p>
-                </Reveal>
-              </div>
-            </section>
-
-            <section className="border-t border-ink-800/80 bg-ink-900/15 px-4 py-24 sm:px-6 md:py-32">
-              <div className="mx-auto max-w-6xl">
-                <Reveal>
-                  <h2 className="font-display text-2xl font-semibold text-ink-50 md:text-3xl">
-                    Extra bits
-                  </h2>
-                </Reveal>
-                <ul className="mt-10 space-y-6">
-                  {placeholders.fun.extras.map((item, i) => (
-                    <Reveal key={item.title} delay={0.06 * i}>
-                      <li className="rounded-2xl border border-ink-700/60 bg-ink-950/30 p-6">
-                        <h3 className="font-display text-xl text-ink-100">
-                          {item.title}
+                  <div className="mt-10 grid gap-6 md:grid-cols-2">
+                    {[
+                      {
+                        blob: "#7aaad8",
+                        school: "Purdue University",
+                        details: ["MS Computer Engineering", "West Lafayette · 2024–2026"],
+                        gpa: "3.96",
+                        gpaLabel: "GPA",
+                        gpaNote: "",
+                      },
+                      {
+                        blob: "#a8c8e8",
+                        school: "IIT Madras",
+                        details: ["BTech Electrical Engineering", "Chennai · 2020–2024"],
+                        gpa: "8.41",
+                        gpaLabel: "GPA / 10",
+                        gpaNote: "",
+                      },
+                    ].map((e) => (
+                      <div key={e.school} className="academic-card relative overflow-hidden p-6">
+                        <div
+                          className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full"
+                          style={{ background: e.blob, opacity: 0.12 }}
+                        />
+                        <h3 className="text-[16px] font-medium text-[#1a2030]">
+                          {e.school}
                         </h3>
-                        <p className="mt-2 font-sans text-sm text-ink-400">
-                          {item.detail}
-                        </p>
-                      </li>
-                    </Reveal>
-                  ))}
-                </ul>
-              </div>
-            </section>
+                        <div className="academic-mono mt-3 space-y-1 text-[11px] tracking-[0.12em] text-[#9ab0c8]">
+                          {e.details.map((d) => (
+                            <div key={d}>{d}</div>
+                          ))}
+                        </div>
 
-            <ContactSection />
+                        <div className="mt-5">
+                          <div className="academic-mono text-[26px] font-medium text-[#5b8fc2]">
+                            {e.gpa}
+                          </div>
+                          <div className="academic-mono mt-1 text-[8px] uppercase tracking-[0.2em] text-[#9ab0c8]">
+                            {e.gpaLabel}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            </div>
           </>
         )}
+
 
         <footer className="border-t border-ink-800/60 px-4 py-8 text-center font-sans text-xs text-ink-600 sm:px-6">
           © {new Date().getFullYear()} {site.name} · Built with curiosity
