@@ -4,7 +4,6 @@ import { mainTabs, type MainTab } from "../content";
 type Props = {
   activeTab: MainTab;
   onTabChange: (tab: MainTab) => void;
-  onLogoClick: () => void;
   onSayHi: () => void;
 };
 
@@ -16,27 +15,20 @@ export function SiteNav({
   const navTheme =
     activeTab === "academic" ? "academic" : "linen";
 
-  const headerClass =
-    navTheme === "dark"
-      ? "fixed left-0 right-0 top-0 z-50 border-b border-ink-800/60 bg-ink-950/75 backdrop-blur-md"
-      : "fixed left-0 right-0 top-0 z-50 bg-transparent";
+  const headerClass = "fixed left-0 right-0 top-0 z-50 bg-transparent";
 
   const linkBase =
     navTheme === "academic"
       ? "text-[#8aabcc] hover:text-[#1a2030]"
-      : navTheme === "linen"
-        ? "text-[#a89070] hover:text-[#281408]"
-        : "text-ink-400 hover:text-ink-200";
+      : "text-[#a89070] hover:text-[#281408]";
 
   const activeColor =
-    navTheme === "academic" ? "text-[#1a2030]" : navTheme === "linen" ? "text-[#281408]" : "text-ink-50";
+    navTheme === "academic" ? "text-[#1a2030]" : "text-[#281408]";
 
   const sayHiClass =
     navTheme === "academic"
       ? "rounded-full border border-[#c0d0e8] bg-transparent px-4 py-2 font-mono text-sm font-medium text-[#3a5070] transition hover:bg-white/50"
-      : navTheme === "linen"
-        ? "rounded-full border border-[#c0a888] bg-[#fdf6ee] px-4 py-2 font-mono text-sm font-medium text-[#5a3820] transition hover:bg-white/70"
-        : "rounded-full bg-accent/15 px-4 py-2 font-sans text-sm font-medium text-accent ring-1 ring-accent/30 transition hover:bg-accent/25";
+      : "rounded-full border border-[#c0a888] bg-[#fdf6ee] px-4 py-2 font-mono text-sm font-medium text-[#5a3820] transition hover:bg-white/70";
 
   return (
     <motion.header

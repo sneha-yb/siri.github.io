@@ -23,10 +23,6 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [tab]);
 
-  function goLogo() {
-    setTab("about");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
 
   const showWipBanner = false;
 
@@ -35,7 +31,6 @@ export default function App() {
       <SiteNav
         activeTab={tab}
         onTabChange={setTab}
-        onLogoClick={goLogo}
         onSayHi={scrollToContact}
       />
       <MobileDock activeTab={tab} onTabChange={setTab} />
